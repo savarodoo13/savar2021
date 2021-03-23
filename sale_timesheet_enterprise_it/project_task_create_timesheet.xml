@@ -1,0 +1,13 @@
+<odoo>
+	<record id="project_task_create_timesheet_view_form_inherit" model="ir.ui.view">
+		<field name="name">project.task.create.timesheet.wizard.form.inherit</field>
+		<field name="model">project.task.create.timesheet</field>
+		<field name="inherit_id" ref="sale_timesheet_enterprise.project_task_create_timesheet_view_form"/>
+		<field name="arch" type="xml">
+			<field name="description" position="after">
+				<field name="drill_id"/>
+				<field name="high"/>
+			</field>
+		</field>
+	</record>
+</odoo>

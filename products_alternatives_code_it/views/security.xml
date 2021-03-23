@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="group_edit_parte_original" model="res.groups">
+        <field name="name">Editar Parte Original</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+    </record>
+    <record id="group_edit_lineas_purchase" model="res.groups">
+        <field name="name">Editar Siempre Las Lineas de Productos (Compras)</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+    </record>
+</odoo>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="view_stock_main_parameter_form" model="ir.ui.view">
+			<field name="name">stock.main.parameter.form</field>
+			<field name="model">stock.main.parameter</field>
+			<field name="arch" type="xml">
+				<form>
+					<sheet>
+						<notebook>
+							<page string="Aceros">
+								<group string="Productos Aceros">
+									<group>
+										<field name="product_id_1"/>
+										<field name="product_id_2"/>
+										<field name="product_id_3"/>
+										<field name="product_id_4"/>
+									</group>
+									<group>
+										<field name="product_id_5"/>
+										<field name="product_id_6"/>
+										<field name="product_id_7"/>
+										<field name="product_id_8"/>
+									</group>
+								</group>
+								<group>
+									<group>
+										<field name="picking_type_id"/>
+									</group>
+									<group>										
+									</group>
+								</group>
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_stock_main_parameter_tree" model="ir.ui.view">
+			<field name="name">stock.main.parameter.tree</field>
+			<field name="model">stock.main.parameter</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="name"/>
+				</tree>
+			</field>
+		</record>
+
+
+		<record id="action_stock_main_parameter_form" model="ir.actions.act_window">
+			<field name="name">Parametros Principales</field>
+			<field name="res_model">stock.main.parameter</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+			  <p class="o_view_nocontent_smiling_face">
+				Crea tu primera tabla de Parametros Principales aqui
+			  </p>
+			</field>
+		</record>
+		<menuitem action="action_stock_main_parameter_form" 
+				  id="menu_action_stock_main_parameter_form" 
+				  parent="stock.menu_stock_config_settings" 
+				  sequence="5"
+				  groups="stock_parameter.group_stock_parameter_root"/>
+	</data>
+</odoo>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data >
+        <record id="view_purchase_order_tree" model="ir.ui.view">
+            <field name="name">purchase.order.tree</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_tree"/>
+            <field name="arch" type="xml">
+                 <field name="user_id" position="after">
+                     <field name="pendiente" readonly="1" />
+<!--                     <field name="total_catidad" readonly="1" />-->
+<!--                     <field name="total_recibido" readonly="1" />-->
+                 </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

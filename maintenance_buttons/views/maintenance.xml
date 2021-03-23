@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id="assets_backend" name="account assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/maintenance_buttons/static/section_and_note_fields_backend.js"></script>
+        </xpath>
+    </template>
+
+	<menuitem id="menu_balance_report_maintenance"
+			action="stock_balance_report.action_balance_report"
+			parent="maintenance.maintenance_reporting"
+			sequence="3"/>
+
+	<record id="hr_equipment_view_form" model="ir.ui.view">
+		<field name="name">maintenance.equipment.form</field>
+		<field name="model">maintenance.equipment</field>
+		<field name="inherit_id" ref="maintenance.hr_equipment_view_form"/>
+		<field name="arch" type="xml">
+			<field name="active" position="after">
+				<field name="code_equipment" />
+			</field>
+		</field>
+	</record>
+
+	<record id="maintenance_request_form_inherit" model="ir.ui.view">
+		<field name="name">maintenance.request.form.inherit</field>
+		<field name="model">maintenance.request</field>
+		<field name="inherit_id" ref="maintenance.hr_equipment_request_view_form"/>
+		<field name="arch" type="xml">
+			<button name="archive_equipment_request" position="after">
+                <button name="print_format" string="Imprimir Formato" type="object" class="oe_highlight" attrs="{'invisible': [('hoja_count', '=', 0)]}"/>
+			</button>
+			<field name="schedule_date" position="after">
+				<label for="expected_duration"/>
+				<div>
+					<field name="expected_duration" widget="float_time" class="oe_inline"/> <span class="ml8">horas</span>
+				</div>
+			</field>
+			<field name="maintenance_type" position="after">
+				<field name="analytic_account_id"/>
+			</field>
+			<xpath expr="//div[@class='oe_right']" position="after">
+				<div class="oe_button_box" name="button_box">
+					<field name="stage_name" invisible="1"/>
+					<button name="get_report" class="oe_stat_button" icon="fa-credit-card" type="object" help="Hoja de Servicio" attrs="{'invisible':[('stage_name','=','Nueva solicitud')]}">
+						<div class="o_field_widget o_stat_info">
+							<span class="o_stat_value"><field name="hoja_count"/></span>
+							<span class="o_stat_text">Hoja de Servicio</span>
+						 </div>
+					</button>
+					<button name="get_maintenance_purchases" class="oe_stat_button" icon="fa-credit-card" type="object" help="Requerimientos">
+						<div class="o_field_widget o_stat_info">
+							<span class="o_stat_value"><field name="purchase_count"/></span>
+							<span class="o_stat_text">Requerimientos</span>
+						 </div>
+					</button>
+					<button name="get_maintenance_pickings" class="oe_stat_button" icon="fa-truck" type="object" help="Almacenes">
+						<div class="o_field_widget o_stat_info">
+							<span class="o_stat_value"><field name="picking_count"/></span>
+							<span class="o_stat_text">Almacenes</span>
+						 </div>
+					</button>
+				</div>
+			</xpath>
+			<field name="category_id" position="after">
+				<field name="linea_report" domain="[('category_id','=',category_id)]" attrs="{'invisible':[('category_id','=',False)]}"/>
+			</field>
+
+			<field name="description" position="before">
+				<notebook>
+					<page string="Horometro">
+						<group>							
+							<group>
+								<field name="horometro_planing" attrs="{'readonly':[('stage_name','!=','Nueva solicitud')]}"/>
+								<field name="horometro_real" attrs="{'readonly':[('stage_name','!=','Nueva solicitud')]}"/>
+							</group>
+							<group>
+								<field name="horometro_real_percution" attrs="{'readonly':[('stage_name','!=','Nueva solicitud')]}"/>
+							</group>
+						</group>
+					</page>
+					<page string="Componentes Principales">
+						<field name="component_lines">
+							<tree editable="bottom">
+								<field name="component_id" required="1"/>
+								<field name="product_id"/>
+								<field name="lot_id"/>
+								<field name="quantity" sum="quantity"/>
+								<field name="notes"/>
+							</tree>
+						</field>
+					</page>
+				</notebook>
+			</field>
+		</field>
+	</record>
+
+
+	<record id="hr_equipment_category_view_form" model="ir.ui.view">
+		<field name="name">maintenance.equipment.category.form</field>
+		<field name="model">maintenance.equipment.category</field>
+		<field name="inherit_id" ref="maintenance.hr_equipment_category_view_form"/>
+		<field name="arch" type="xml">
+			<xpath expr="//sheet" position="inside">
+				<group>
+					<field name="tipo_mantenimiento" nolabel="1">
+						<tree editable="bottom">
+							<field name="formato_id" required="1"/>
+						</tree>
+					</field>
+				</group>
+			</xpath>
+		</field>
+	</record>
+
+        <record id="view_formato_maintenance_request_form" model="ir.ui.view">
+            <field name="name">formato.maintenance.request.form</field>
+            <field name="model">formato.maintenance.request</field>
+            <field name="arch" type="xml">
+                <form string="Formato de Mantenimiento">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1><field name="name" readonly="1"/></h1>
+                        </div>
+                        <group>
+                        	<notebook>
+                        		<page string="Detalle">
+                        			<field name="detalle_ids" widget="section_and_note_one2many">
+                        				<tree editable="bottom" create="0" delete="0">
+		                                    <field name="sequence" invisible="1"/>
+		                                    <field name="display_type" invisible="1"/>
+		                                    <field name="order" invisible="1"/>
+		                                    <field name="name" widget="section_and_note_many2one" readonly="1"/>
+		                                    <field name="valor" required="0" widget="radio"/>
+		                                    <field name="description" required="0"/>
+                        				</tree>
+                        			</field>
+                        		</page>
+                        	</notebook>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_formato_maintenance_request_form_template" model="ir.ui.view">
+            <field name="name">formato.maintenance.request.template.form</field>
+            <field name="model">formato.maintenance.request.template</field>
+            <field name="arch" type="xml">
+                <form string="Formato de Mantenimiento">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1><field name="name" required="1"/></h1>
+                        </div>
+                        <group>
+                        	<field name="code"/>
+                        </group>
+                        <group>
+                        	<notebook>
+                        		<page string="Detalle">
+                        			<field name="detalle_ids" widget="section_and_note_one2many">
+                        				<tree editable="bottom">
+                        					<control>
+		                                        <create name="add_product_control" string="Add a product"/>
+		                                        <create name="add_section_control" string="Add a section" context="{'default_display_type': 'line_section'}"/>
+		                                    </control>
+		                                    <field name="sequence" widget="handle"/>
+		                                    <field name="display_type" invisible="1"/>
+		                                    <field name="name" widget="section_and_note_many2one" required="1"/>
+                        				</tree>
+                        			</field>
+                        		</page>
+                        	</notebook>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+    <record id="view_items_de_formato" model="ir.ui.view">
+            <field name="name">reporte.template.name.tree</field>
+            <field name="model">reporte.template.name</field>
+            <field name="arch" type="xml">
+                <tree string="Items de Formato" editable="bottom">
+                    <field name="name" required="1"/>
+                    <field name="code" required="0"/>
+                </tree>
+            </field>
+        </record>
+
+
+    <record id="action_items_de_formato" model="ir.actions.act_window">
+        <field name="name">Items de Formato</field>
+        <field name="res_model">reporte.template.name</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <menuitem name="Items de Formato" action="action_items_de_formato" id="menu_action_items_de_formato" parent="maintenance.menu_maintenance_configuration" sequence="1"/>
+
+
+
+        <record id="view_formato_maintenance_request_tree_template" model="ir.ui.view">
+            <field name="name">formato.maintenance.request.template.tree</field>
+            <field name="model">formato.maintenance.request.template</field>
+            <field name="arch" type="xml">
+                <tree string="Formato de Mantenimiento">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+
+
+    <record id="action_formato_maintenance_template" model="ir.actions.act_window">
+        <field name="name">Formatos de Mantenimiento</field>
+        <field name="res_model">formato.maintenance.request.template</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Formatos de Mantenimiento" action="action_formato_maintenance_template" id="menu_action_formato_maintenance_template" parent="maintenance.menu_maintenance_configuration" sequence="1"/>
+
+
+
+
+
+
+    <record id="view_formato_maintenance_request_tree_template_formatcategory" model="ir.ui.view">
+            <field name="name">maintenance.request.category.type.report.tree</field>
+            <field name="model">maintenance.request.category.type.report</field>
+            <field name="arch" type="xml">
+                <tree string="Formato por Categoria" editable="bottom">
+                    <field name="category_id" required="1"/>
+                    <field name="formato_id" required="1"/>
+                </tree>
+            </field>
+        </record>
+
+
+    <record id="action_formato_maintenance_template_categoryformat" model="ir.actions.act_window">
+        <field name="name">Formatos de Mantenimiento</field>
+        <field name="res_model">maintenance.request.category.type.report</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <menuitem name="Formatos por Categoria" action="action_formato_maintenance_template_categoryformat" id="menu_action_formato_maintenance_template_categoryformat" parent="maintenance.menu_maintenance_configuration" sequence="1"/>
+
+
+
+	<record id="hr_equipment_form_inherit" model="ir.ui.view">
+		<field name="name">hr.equipment.form.inherit</field>
+		<field name="model">maintenance.equipment</field>
+		<field name="inherit_id" ref="maintenance.hr_equipment_view_form"/>
+		<field name="arch" type="xml">
+			<xpath expr="//notebook" position="inside">
+				<page string="Horometro/Combustible">
+					<header>
+						<button name="get_horometer_lines" string="Ver Horometro" type="object" class="oe_highlight"/>
+					</header>
+					<field name="horometer_line_ids">
+						<tree edit="0" create="0" delete="0">
+							<field name="date"/>
+							<field name="fuel_hour_from" widget="timesheet_uom"/>
+							<field name="fuel_hour_to" widget="timesheet_uom"/>
+							<field name="percution_hour_from"/>
+							<field name="percution_hour_to"/>
+							<field name="diesel_hour_from"/>
+							<field name="diesel_hour_to"/>
+							<field name="refuel_time" widget="timesheet_uom"/>
+							<field name="fuel_qty"/>
+						</tree>
+					</field>
+				</page>
+			</xpath>
+		</field>
+	</record>
+</odoo>

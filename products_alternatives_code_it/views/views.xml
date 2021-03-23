@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="alternatives_products" model="ir.ui.view">
+           <field name="name">Product.view</field>
+           <field name="model">product.template</field>
+           <field name="inherit_id" ref="product.product_template_tree_view"/>
+           <field name="arch" type="xml">
+              <xpath expr="//field[@name='name']" position="after">
+                    <field name="edit_part_origin"  invisible="1"/>
+                   <field name="part_origin" optional="show"  attrs = "{'readonly':[('edit_part_origin','!=',True)]}" />
+              </xpath>
+           </field>
+    </record>
+
+    <record id="product_template_herencia" model="ir.ui.view">
+           <field name="name">Product.template.form</field>
+           <field name="model">product.template</field>
+           <field name="inherit_id" ref="product.product_template_only_form_view"/>
+           <field name="arch" type="xml">
+           	   <xpath expr="//field[@name='barcode']" position="after">
+                        <field name="edit_part_origin"  invisible="1" />
+                       <field name="part_origin"  attrs = "{'readonly':[('edit_part_origin','!=',True)]}" />
+	           </xpath>
+           </field>
+    </record>
+
+    <record id="product_template_search_form_or" model="ir.ui.view">
+            <field name="name">product.template.search.origin.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_search_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="part_origin"  />
+                    <group string="Group By">
+                        <filter name="by_part_original" string="Parte Original"
+                                context="{'group_by': 'part_origin'}"/>
+                    </group>
+                </xpath>
+            </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_wizard_form" model="ir.ui.view">
+            <field name="name">view.wizard.form</field>
+            <field name="model">wizard.maintenance</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="fecha_inicial" />
+                            </group>
+                            <group>
+                                <field name="fecha_final" />
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="get_report" string="Procesar" class="btn-primary" type="object"/>
+                        <button special="cancel" string="Cancelar" class="btn-secondary" />
+                    </footer>
+                </form>
+
+            </field>
+        </record>
+
+        <record id="action_wizard_view" model="ir.actions.act_window">
+            <field name="name">Indicadores</field>
+            <field name="res_model">wizard.maintenance</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_wizard_form" />
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_wizard_view"
+                  name="Indicadores"
+                  parent="maintenance.maintenance_reporting"
+                  action="action_wizard_view"
+                  sequence="2"/>
+
+        <record id="view_report_tree" model="ir.ui.view">
+            <field name="name">view.report.tree</field>
+            <field name="model">list.report</field>
+            <field name="arch" type="xml">
+                <tree string="Equipos" delete="0" create="0">
+                    <field name="name"/>
+                    <field name="mtbf"/>
+                    <field name="mttr"/>
+                    <field name="disponibilidad"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_report_pivot" model="ir.ui.view">
+            <field name="name">view.report.pivot</field>
+            <field name="model">list.report</field>
+            <field name="arch" type="xml">
+                <pivot string="Equipos">
+                    <field name="mtbf" type="measure"/>
+                    <field name="mttr" type="measure"/>
+                    <field name="disponibilidad" type="measure"/>
+                    <field name="name" type="row"/>
+<!--                    <field name="periodo" type="col"/>-->
+                </pivot>
+            </field>
+        </record>
+
+        <record id="view_report_graph" model="ir.ui.view">
+            <field name="name">view.report.graph</field>
+            <field name="model">list.report</field>
+            <field name="arch" type="xml">
+                <graph string="Equipos" type="bar" stacked="1">
+                    <field name="mtbf"/>
+                    <field name="mttr"/>
+                    <field name="disponibilidad"/>
+                </graph>
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,388 @@
+<odoo>
+
+	<record id="view_picking_form" model="ir.ui.view">
+            <field name="name">stock.picking.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+
+               <field name="partner_id" position="after">
+                    <field name="empleado_resp_id" />
+               </field>
+            </field>
+    </record>
+
+	<record id="view_task_form2_inherit" model="ir.ui.view">
+		<field name="name">project.task.form.inherit</field>
+		<field name="model">project.task</field>
+		<field name="inherit_id" ref="project.view_task_form2"/>
+		<field name="arch" type="xml">
+			<xpath expr="//header" position="inside">
+				<button name="get_location" string="Almacen" type="object"/>
+			</xpath>
+			<field name="date_deadline" position="attributes">
+				<attribute name="required">1</attribute>
+			</field>
+			<field name="project_id" position="before">
+				<field name="contract_type_id"/>
+				<field name="area_id"/>
+			</field>
+			<field name="project_id" position="attributes">
+				<attribute name="invisible">1</attribute>
+			</field>
+			<field name="user_id" position="attributes">
+				<attribute name="string">Usuario Odoo</attribute>
+			</field>
+			<field name="tag_ids" position="after">
+				<field name="shift"/>
+				<field name="equipment_id" required="1"/>
+				<field name="supervisor_id"/>
+				<field name="operator_id"/>
+				<field name="helper_id"/>
+			</field>
+			<xpath expr="//sheet/group" position="after">
+				<group name="totals" string="Totales">
+					<group>
+						<field name="drills"/>
+						<field name="highs"/>
+						<field name="effective_hours" string="Horas Trabajadas" widget="timesheet_uom"/>
+					</group>
+				</group>
+			</xpath>
+			<page name="description_page" position="attributes">
+				<attribute name="invisible">1</attribute>
+			</page>
+			<xpath expr="//notebook/page[@id='timesheets_tab']" position="after">
+				<page name="binnacle" string="Bitacora">
+					<field name="binnacle_ids">
+						<tree editable="bottom">
+							<field name="operation_id"/>
+							<field name="hour_from" widget="timesheet_uom"/>
+							<field name="hour_to" widget="timesheet_uom"/>
+							<field name="unit_amount" widget="timesheet_uom"/>
+							<field name="observation" />
+						</tree>
+					</field>
+				</page>
+				<page name="fuel" string="Horometro/Combustible">
+					<group>
+						<group>
+							<field name="fuel_hour_from"/>
+							<field name="fuel_hour_to"/>
+							<field name="fuel_diesel_hour_from"/>
+							<field name="fuel_diesel_hour_to"/>
+						</group>
+						<group>
+							<field name="refuel_time"/>
+							<field name="fuel_qty"/>
+						</group>
+					</group>
+				</page>
+				<page name="steels" string="Aceros">
+					<field name="timesheet_ids2">
+						<tree editable="bottom" create="0" delete="0">
+							<field name="drill_id" readonly="1"/>
+
+				<field name="bank_id" readonly="1"/>
+				<field name="project_work_id" invisible="1"/>
+				<field name="drill_type_obj" readonly="1"/>
+				<field name="high" readonly="1"/>
+
+							<field name="broca_id" />
+							<field name="martillo_id" />
+							<field name="pinbox_id" />
+							<field name="chuck_id" />
+							<field name="tubo1_id" />
+							<field name="tubo2_id" />
+							<field name="tubo3_id" />
+							<field name="tubo4_id" />
+							<field name="tubo5_id" />
+							<field name="tubo6_id" />
+						</tree>
+					</field>
+				</page>
+			</xpath>
+		</field>
+	</record>
+	<record id="view_task_form2_inherited_it" model="ir.ui.view">
+		<field name="name">project.task.form2.inherited.it</field>
+		<field name="model">project.task</field>
+		<field name="inherit_id" ref="hr_timesheet.view_task_form2_inherited"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='timesheet_ids']//tree/field[@name='date']" position="attributes">
+				<attribute name="invisible">1</attribute>
+			</xpath>
+			<xpath expr="//field[@name='timesheet_ids']//tree/field[@name='name']" position="attributes">
+				<attribute name="invisible">1</attribute>
+			</xpath>
+			<xpath expr="//field[@name='timesheet_ids']//tree/field[@name='employee_id']" position="attributes">
+				<attribute name="invisible">1</attribute>
+			</xpath>
+			<xpath expr="//field[@name='timesheet_ids']//tree/field[@name='unit_amount']" position="before">			
+				<field name="block_id"/>
+				<field name="bank_id"/>
+				<field name="project_work_id"/>
+				<field name="drill_id"/>
+
+
+				<field name="terrain_obj" options="{'no_create': True, 'no_create_edit':True}"/>
+				<field name="drill_type_obj" options="{'no_create': True, 'no_create_edit':True}"/>
+				<field name="hardness_obj" options="{'no_create': True, 'no_create_edit':True}"/>
+
+				<field name="terrain" invisible="1"/>
+				<field name="drill_type" invisible="1"/>
+				<field name="hardness" invisible="1"/>
+				<field name="high"/>
+				<field name="hour_from" widget="timesheet_uom"/>
+				<field name="hour_to" widget="timesheet_uom"/>
+			</xpath>
+			<xpath expr="//field[@name='timesheet_ids']//tree/field[@name='unit_amount']" position="after">
+				<field name="details"/>
+			</xpath>
+		</field>
+	</record>
+
+
+	<record id="view_production_lot_form" model="ir.ui.view">
+		<field name="name">stock.production.lot.form</field>
+		<field name="model">stock.production.lot</field>
+		<field name="inherit_id" ref="stock.view_production_lot_form"/>
+		<field name="arch" type="xml">
+			<field name="company_id" position="after">
+				<field name="date_vencimiento"/>
+				<field name="metros_total" readonly="1"/>
+			</field>
+		</field>
+	</record>
+
+
+
+
+
+
+
+	<record id="project_terrain_tree" model="ir.ui.view">
+		<field name="name">project.terrain.tree</field>
+		<field name="model">project.terrain</field>
+		<field name="arch" type="xml">
+			<tree string="Terreno" editable="bottom">
+				<field name="name" required="1"/>
+				<field name="active" />
+			</tree>
+		</field>
+	</record>
+
+
+		<record id="project_terrain_action" model="ir.actions.act_window">
+			<field name="name">Terreno</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">project.terrain</field>
+			<field name="view_mode">tree</field>		
+		</record>
+
+	<menuitem
+			id="project_terrain_menu"
+			action="project_terrain_action"
+			parent="project.menu_project_config"
+			sequence="3"
+			groups="project_it.menus_tablas_extras_project"/>
+
+
+	<record id="project_type_drill_tree" model="ir.ui.view">
+		<field name="name">project.type.drill.tree</field>
+		<field name="model">project.type.drill</field>
+		<field name="arch" type="xml">
+			<tree string="Tipo Taladro" editable="bottom">
+				<field name="name" required="1"/>
+				<field name="active" />
+			</tree>
+		</field>
+	</record>
+
+
+		<record id="project_type_drill_action" model="ir.actions.act_window">
+			<field name="name">Tipo de Taladro</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">project.type.drill</field>
+			<field name="view_mode">tree</field>		
+		</record>
+
+	<menuitem
+			id="project_type_drill_menu"
+			action="project_type_drill_action"
+			parent="project.menu_project_config"
+			sequence="3"
+			groups="project_it.menus_tablas_extras_project"/>
+
+
+	<record id="project_hardness_tree" model="ir.ui.view">
+		<field name="name">project.hardness.tree</field>
+		<field name="model">project.hardness</field>
+		<field name="arch" type="xml">
+			<tree string="Dureza" editable="bottom">
+				<field name="name" required="1"/>
+				<field name="active" />
+			</tree>
+		</field>
+	</record>
+
+
+		<record id="project_hardness_action" model="ir.actions.act_window">
+			<field name="name">Dureza</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">project.hardness</field>
+			<field name="view_mode">tree</field>		
+		</record>
+
+	<menuitem
+			id="project_hardness_menu"
+			action="project_hardness_action"
+			parent="project.menu_project_config"
+			sequence="3"
+			groups="project_it.menus_tablas_extras_project"/>
+
+
+
+
+
+	<record id="project_area_tree" model="ir.ui.view">
+		<field name="name">project.area.tree</field>
+		<field name="model">project.area</field>
+		<field name="arch" type="xml">
+			<tree string="Area" editable="bottom">
+				<field name="name" required="1"/>
+				<field name="active" />
+			</tree>
+		</field>
+	</record>
+
+
+		<record id="project_area_action" model="ir.actions.act_window">
+			<field name="name">Area</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">project.area</field>
+			<field name="view_mode">tree</field>		
+		</record>
+
+	<menuitem
+			id="project_area_menu"
+			action="project_area_action"
+			parent="project.menu_project_config"
+			sequence="3"
+			groups="project_it.menus_tablas_extras_project"/>
+
+
+
+	<record id="project_contract_type_tree" model="ir.ui.view">
+		<field name="name">project.contract.type.tree</field>
+		<field name="model">project.contract.type</field>
+		<field name="arch" type="xml">
+			<tree string="Tipo de Contrato" editable="bottom">
+				<field name="name" required="1"/>
+				<field name="active" />
+			</tree>
+		</field>
+	</record>
+
+
+		<record id="project_contract_type_action" model="ir.actions.act_window">
+			<field name="name">Tipo de Contrato</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">project.contract.type</field>
+			<field name="view_mode">tree</field>		
+		</record>
+
+	<menuitem
+			id="project_contract_type_menu"
+			action="project_contract_type_action"
+			parent="project.menu_project_config"
+			sequence="3"
+			groups="project_it.menus_tablas_extras_project"/>
+
+
+
+        <record id="view_inherit_maintenance2_form" model="ir.ui.view">
+            <field name="name">view.inherit.maintenance2.form</field>
+            <field name="model">maintenance.request</field>
+            <field name="inherit_id" ref="maintenance.hr_equipment_request_view_form"/>
+            <field name="arch" type="xml">
+                
+                <!-- position: after|before|replace|attributes|inside -->
+                
+                <label for="name" position="before">
+
+                        <label for="correlativo" class="oe_edit_only" string="Correlativo"/>
+                        <h1>
+                            <field name="correlativo" placeholder="Correlativo" readonly="1"/>
+                        </h1>
+                </label>
+
+                <field name="maintenance_type" position="after">
+                	<field name="type_preventivo"  attrs="{'invisible':[('maintenance_type','!=','preventive')]}" options="{'no_create': True, 'no_create_edit':True}" /> 
+                	<field name="type_correctivo"  attrs="{'invisible':[('maintenance_type','!=','corrective')]}" options="{'no_create': True, 'no_create_edit':True}" />    
+                	<field name="horometer_percusion_final" readonly="1"/>
+                	<field name="horometer_diesel_final" readonly="1"/>
+                </field>           
+            </field>
+        </record>
+
+
+
+
+	<record id="maintenance_request_preventivo_tree" model="ir.ui.view">
+		<field name="name">maintenance.request.preventivo.tree</field>
+		<field name="model">maintenance.request.preventivo</field>
+		<field name="arch" type="xml">
+			<tree string="Tipo Preventivo" editable="bottom">
+				<field name="name" required="1"/>
+				<field name="active" />
+			</tree>
+		</field>
+	</record>
+
+
+		<record id="maintenance_request_preventivo_action" model="ir.actions.act_window">
+			<field name="name">Tipo Preventivo</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">maintenance.request.preventivo</field>
+			<field name="view_mode">tree</field>		
+		</record>
+
+	<menuitem
+			id="maintenance_request_preventivo_menu"
+			action="maintenance_request_preventivo_action"
+			parent="project.menu_project_config"
+			sequence="3"
+			groups="project_it.menus_tablas_extras_project"/>
+
+
+	<record id="maintenance_request_correctivo_tree" model="ir.ui.view">
+		<field name="name">maintenance.request.correctivo.tree</field>
+		<field name="model">maintenance.request.correctivo</field>
+		<field name="arch" type="xml">
+			<tree string="Tipo Correctivo" editable="bottom">
+				<field name="name" required="1"/>
+				<field name="active" />
+			</tree>
+		</field>
+	</record>
+
+
+		<record id="maintenance_request_correctivo_action" model="ir.actions.act_window">
+			<field name="name">Tipo Correctivo</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">maintenance.request.correctivo</field>
+			<field name="view_mode">tree</field>		
+		</record>
+
+	<menuitem
+			id="maintenance_request_correctivo_menu"
+			action="maintenance_request_correctivo_action"
+			parent="project.menu_project_config"
+			sequence="3"
+			groups="project_it.menus_tablas_extras_project"/>
+
+
+
+	
+</odoo>

@@ -1,0 +1,404 @@
+<odoo>
+
+
+	<record id="presupuesto_linea_it_form" model="ir.ui.view">
+		<field name="name">presupuesto.linea.it.form</field>
+		<field name="model">presupuesto.linea.it</field>
+		<field name="arch" type="xml">
+			<form string="Presupuesto Mensual">
+				 <header>
+                    <button string="Actualizar" type="object" name="actualizar" class="oe_highlight"/>
+                </header>   
+
+                    <group class="oe_title">
+                        <h1>
+                            <field name="name" required="1"/>
+                        </h1>
+                    </group>
+
+                <group>
+                    <group string="Mes">
+                        <field name="inicio_mes" readonly="1"/>
+                        <field name="fin_mes" readonly="1"/>
+                    </group>
+                    <group string="Periodo">
+                        <field name="inicio_periodo" required="1"/>
+                        <field name="fin_periodo" required="1"/>
+                    </group>
+                </group>
+                <group string="BUDGET CLIENTE MES" col="5">
+                    <group col="5" colspan="5">
+                    	<label for="id" string="Cantidad"/>
+                    	<label for="id" string="Unidad"/>
+                    	<label for="id" string="P.U."/>
+                    	<label for="id" string="Moneda"/>
+                    	<label for="id" string="Total"/>
+
+                    	<field name="budget_cliente_total_cantidad" nolabel="1"  required="1"/>
+                    	<field name="budget_cliente_total_unidad" nolabel="1"  required="1"/>
+                    	<field name="budget_cliente_total_pu" nolabel="1" required="1"/>
+                    	<field name="budget_cliente_total_moneda" nolabel="1" required="1"/>
+                    	<field name="budget_cliente_total_total" nolabel="1" readonly="1"/>
+                    </group>
+                </group>
+                <group string="BUDGET OWM MES" col="5">
+                    <group col="5" colspan="5">
+                    	<label for="id" string="Cantidad"/>
+                    	<label for="id" string="Unidad"/>
+                    	<label for="id" string="P.U."/>
+                    	<label for="id" string="Moneda"/>
+                    	<label for="id" string="Total"/>
+
+                    	<field name="budget_owm_total_cantidad" nolabel="1" required="1"/>
+                    	<field name="budget_owm_total_unidad" nolabel="1" required="1"/>
+                    	<field name="budget_owm_total_pu" nolabel="1" required="1"/>
+                    	<field name="budget_owm_total_moneda" nolabel="1" required="1"/>
+                    	<field name="budget_owm_total_total" nolabel="1" readonly="1"/>
+                    </group>
+                </group>
+                <group string="FORECAST CLIENTE MES" col="5">
+                    <group col="5" colspan="5">
+                    	<label for="id" string="Cantidad"/>
+                    	<label for="id" string="Unidad"/>
+                    	<label for="id" string="P.U."/>
+                    	<label for="id" string="Moneda"/>
+                    	<label for="id" string="Total"/>
+
+                    	<field name="forecast_cliente_total_cantidad" nolabel="1"  required="1"/>
+                    	<field name="forecast_cliente_total_unidad" nolabel="1" required="1"/>
+                    	<field name="forecast_cliente_total_pu" nolabel="1" required="1"/>
+                    	<field name="forecast_cliente_total_moneda" nolabel="1" required="1"/>
+                    	<field name="forecast_cliente_total_total" nolabel="1" readonly="1"/>
+                    </group>
+                </group>
+                <group string="FORECAST OWM MES" col="5">
+                    <group col="5" colspan="5">
+                    	<label for="id" string="Cantidad"/>
+                    	<label for="id" string="Unidad"/>
+                    	<label for="id" string="P.U."/>
+                    	<label for="id" string="Moneda"/>
+                    	<label for="id" string="Total"/>
+
+                    	<field name="forecast_owm_total_cantidad" nolabel="1" required="1"/>
+                    	<field name="forecast_owm_total_unidad" nolabel="1" required="1"/>
+                    	<field name="forecast_owm_total_pu" nolabel="1" required="1"/>
+                    	<field name="forecast_owm_total_moneda" nolabel="1" required="1"/>
+                    	<field name="forecast_owm_total_total" nolabel="1" readonly="1"/>
+                    </group>
+                </group>
+
+                <notebook>
+                	<page string="Mes Anterior">
+                		<group col="4" colspan="5">	                			
+	                    	<label for="id" string=" "/>
+	                    	<label for="id" string="Cantidad"/>
+	                    	<label for="id" string="Porcentaje"/>
+	                    	<label for="id" string="Total"/>
+
+
+	                    	<label for="id" string="Budget Cliente Mes"/>
+	                    	<field name="budget_cliente_ant_cantidad" nolabel="1" readonly="1"/>
+	                    	<field name="budget_cliente_ant_porc" nolabel="1" readonly="1"/>
+	                    	<field name="budget_cliente_ant_total" nolabel="1" readonly="1"/>
+
+	                    	<label for="id" string="Budget OWM Mes"/>
+	                    	<field name="budget_owm_ant_cantidad" nolabel="1" readonly="1"/>
+	                    	<field name="budget_owm_ant_porc" nolabel="1" readonly="1"/>
+	                    	<field name="budget_owm_ant_total" nolabel="1" readonly="1"/>
+
+	                    	<label for="id" string="Forecast Cliente Mes"/>
+	                    	<field name="forecast_cliente_ant_cantidad" nolabel="1" readonly="1"/>
+	                    	<field name="forecast_cliente_ant_porc" nolabel="1" readonly="1"/>
+	                    	<field name="forecast_cliente_ant_total" nolabel="1" readonly="1"/>
+
+	                    	<label for="id" string="Forecast OWM Mes"/>
+	                    	<field name="forecast_owm_ant_cantidad" nolabel="1" readonly="1"/>
+	                    	<field name="forecast_owm_ant_porc" nolabel="1" readonly="1"/>
+	                    	<field name="forecast_owm_ant_total" nolabel="1" readonly="1"/>
+                		</group>
+                	</page>
+                	<page string="Actual">
+                		<group col="4" colspan="5">	                			
+	                    	<label for="id" string=" "/>
+	                    	<label for="id" string="Cantidad"/>
+	                    	<label for="id" string="Porcentaje"/>
+	                    	<label for="id" string="Total"/>
+
+
+	                    	<label for="id" string="Budget Cliente Mes"/>
+	                    	<field name="budget_cliente_actual_cantidad" nolabel="1" readonly="1"/>
+	                    	<field name="budget_cliente_actual_porc" nolabel="1" readonly="1"/>
+	                    	<field name="budget_cliente_actual_total" nolabel="1" readonly="1"/>
+
+	                    	<label for="id" string="Budget OWM Mes"/>
+	                    	<field name="budget_owm_actual_cantidad" nolabel="1" readonly="1"/>
+	                    	<field name="budget_owm_actual_porc" nolabel="1" readonly="1"/>
+	                    	<field name="budget_owm_actual_total" nolabel="1" readonly="1"/>
+
+	                    	<label for="id" string="Forecast Cliente Mes"/>
+	                    	<field name="forecast_cliente_actual_cantidad" nolabel="1" readonly="1"/>
+	                    	<field name="forecast_cliente_actual_porc" nolabel="1" readonly="1"/>
+	                    	<field name="forecast_cliente_actual_total" nolabel="1" readonly="1"/>
+
+	                    	<label for="id" string="Forecast OWM Mes"/>
+	                    	<field name="forecast_owm_actual_cantidad" nolabel="1" readonly="1"/>
+	                    	<field name="forecast_owm_actual_porc" nolabel="1" readonly="1"/>
+	                    	<field name="forecast_owm_actual_total" nolabel="1" readonly="1"/>
+                		</group>
+                	</page>
+                	<page string="Acumulado">
+                		<group col="4" colspan="5">	                			
+	                    	<label for="id" string=" "/>
+	                    	<label for="id" string="Cantidad"/>
+	                    	<label for="id" string="Porcentaje"/>
+	                    	<label for="id" string="Total"/>
+
+
+	                    	<label for="id" string="Budget Cliente Mes"/>
+	                    	<field name="budget_cliente_acum_cantidad" nolabel="1" readonly="1"/>
+	                    	<field name="budget_cliente_acum_porc" nolabel="1" readonly="1"/>
+	                    	<field name="budget_cliente_acum_total" nolabel="1" readonly="1"/>
+
+	                    	<label for="id" string="Budget OWM Mes"/>
+	                    	<field name="budget_owm_acum_cantidad" nolabel="1" readonly="1"/>
+	                    	<field name="budget_owm_acum_porc" nolabel="1" readonly="1"/>
+	                    	<field name="budget_owm_acum_total" nolabel="1" readonly="1"/>
+
+	                    	<label for="id" string="Forecast Cliente Mes"/>
+	                    	<field name="forecast_cliente_acum_cantidad" nolabel="1" readonly="1"/>
+	                    	<field name="forecast_cliente_acum_porc" nolabel="1" readonly="1"/>
+	                    	<field name="forecast_cliente_acum_total" nolabel="1" readonly="1"/>
+
+	                    	<label for="id" string="Forecast OWM Mes"/>
+	                    	<field name="forecast_owm_acum_cantidad" nolabel="1" readonly="1"/>
+	                    	<field name="forecast_owm_acum_porc" nolabel="1" readonly="1"/>
+	                    	<field name="forecast_owm_acum_total" nolabel="1" readonly="1"/>
+                		</group>
+                	</page>
+                	<page string="Saldo">
+                		<group col="4" colspan="5">	                			
+	                    	<label for="id" string=" "/>
+	                    	<label for="id" string="Cantidad"/>
+	                    	<label for="id" string="Porcentaje"/>
+	                    	<label for="id" string="Total"/>
+
+
+	                    	<label for="id" string="Budget Cliente Mes"/>
+	                    	<field name="budget_cliente_saldo_cantidad" nolabel="1" readonly="1"/>
+	                    	<field name="budget_cliente_saldo_porc" nolabel="1" readonly="1"/>
+	                    	<field name="budget_cliente_saldo_total" nolabel="1" readonly="1"/>
+
+	                    	<label for="id" string="Budget OWM Mes"/>
+	                    	<field name="budget_owm_saldo_cantidad" nolabel="1" readonly="1"/>
+	                    	<field name="budget_owm_saldo_porc" nolabel="1" readonly="1"/>
+	                    	<field name="budget_owm_saldo_total" nolabel="1" readonly="1"/>
+
+	                    	<label for="id" string="Forecast Cliente Mes"/>
+	                    	<field name="forecast_cliente_saldo_cantidad" nolabel="1" readonly="1"/>
+	                    	<field name="forecast_cliente_saldo_porc" nolabel="1" readonly="1"/>
+	                    	<field name="forecast_cliente_saldo_total" nolabel="1" readonly="1"/>
+
+	                    	<label for="id" string="Forecast OWM Mes"/>
+	                    	<field name="forecast_owm_saldo_cantidad" nolabel="1" readonly="1"/>
+	                    	<field name="forecast_owm_saldo_porc" nolabel="1" readonly="1"/>
+	                    	<field name="forecast_owm_saldo_total" nolabel="1" readonly="1"/>
+                		</group>
+                	</page>
+                </notebook>
+
+			</form>
+		</field>
+	</record>
+
+
+
+	<record id="presupuesto_it_form" model="ir.ui.view">
+		<field name="name">presupuesto.it.form</field>
+		<field name="model">presupuesto.it</field>
+		<field name="arch" type="xml">
+			<form string="Presupuesto">
+				 <header>
+                    <button string="Cerrar" type="object" name="cerrar" states="draft" class="oe_highlight"/>
+                    <button string="Abrir" type="object" name="abrir" states="done" class="oe_highlight"/>
+                    <button string="Actualizar" type="object" name="actualizar"  states="draft" class="oe_highlight"/>
+                    <field name="state" widget="statusbar" readonly="1"/>
+                </header>   
+                   <group class="oe_title">
+                        <h1>
+                            <field name="name" attrs="{'readonly':[('state','in',['done'])]}" required="1"/>
+                        </h1>
+                    </group>
+                <group string="Detalle del Presupuesto">
+                    <group>
+                        <field name="project_id" attrs="{'readonly':[('state','in',['done'])]}" required="1"/>
+                        <field name="unidad_operativa" attrs="{'readonly':[('state','in',['done'])]}" required="1"/>
+                        <field name="contratista" attrs="{'readonly':[('state','in',['done'])]}" />
+                        <field name="contrato" attrs="{'readonly':[('state','in',['done'])]}" required="1"/>
+                        <field name="area" attrs="{'readonly':[('state','in',['done'])]}" required="1"/>
+                    </group>
+                    <group>
+                        <field name="num_contrato" attrs="{'readonly':[('state','in',['done'])]}" required="1"/>
+                        <field name="num_orden_trabajo" attrs="{'readonly':[('state','in',['done'])]}" required="1"/>
+                        <field name="num_orden_cambio" attrs="{'readonly':[('state','in',['done'])]}" required="1"/>
+                        <field name="num_solped" attrs="{'readonly':[('state','in',['done'])]}" required="1"/>
+                        <field name="description" attrs="{'readonly':[('state','in',['done'])]}" />
+                    </group>
+                </group>
+                <group string="BUDGET CLIENTE TOTAL" col="5">
+                    <group col="5" colspan="5">
+                    	<label for="id" string="Cantidad"/>
+                    	<label for="id" string="Unidad"/>
+                    	<label for="id" string="P.U."/>
+                    	<label for="id" string="Moneda"/>
+                    	<label for="id" string="Total"/>
+
+                    	<field name="budget_total_cantidad" nolabel="1" required="1" attrs="{'readonly':[('state','in',['done'])]}"/>
+                    	<field name="budget_total_unidad" nolabel="1" required="1" attrs="{'readonly':[('state','in',['done'])]}"/>
+                    	<field name="budget_total_pu" nolabel="1" required="1" attrs="{'readonly':[('state','in',['done'])]}"/>
+                    	<field name="budget_total_moneda" nolabel="1" required="1" attrs="{'readonly':[('state','in',['done'])]}"/>
+                    	<field name="budget_total_total" nolabel="1" readonly="1"/>
+                    </group>
+                    <group col="4" colspan="5">
+                    	<group>
+                    		<field name="budget_fecha_inicio"  required="1" attrs="{'readonly':[('state','in',['done'])]}"/>
+                    		<field name="budget_fecha_fin"  required="1" attrs="{'readonly':[('state','in',['done'])]}"/>
+                    	</group>
+                    	<group>
+                    		<field name="budget_meses"  required="1" attrs="{'readonly':[('state','in',['done'])]}"/>
+                    	</group>
+                    </group>
+                </group>
+
+                <group string="BUDGET OWM TOTAL" col="5">
+                    <group col="5" colspan="5">
+                    	<label for="id" string="Cantidad"/>
+                    	<label for="id" string="Unidad"/>
+                    	<label for="id" string="P.U."/>
+                    	<label for="id" string="Moneda"/>
+                    	<label for="id" string="Total"/>
+
+                    	<field name="owm_total_cantidad" nolabel="1" required="1" attrs="{'readonly':[('state','in',['done'])]}"/>
+                    	<field name="owm_total_unidad" nolabel="1" required="1" attrs="{'readonly':[('state','in',['done'])]}"/>
+                    	<field name="owm_total_pu" nolabel="1" required="1" attrs="{'readonly':[('state','in',['done'])]}"/>
+                    	<field name="owm_total_moneda" nolabel="1" required="1" attrs="{'readonly':[('state','in',['done'])]}"/>
+                    	<field name="owm_total_total" nolabel="1" readonly="1"/>
+                    </group>
+                    <group col="4" colspan="5">
+                    	<group>
+                    		<field name="owm_fecha_inicio"  required="1" attrs="{'readonly':[('state','in',['done'])]}"/>
+                    		<field name="owm_fecha_fin"  required="1" attrs="{'readonly':[('state','in',['done'])]}"/>
+                    	</group>
+                    	<group>
+                    		<field name="owm_meses"  required="1" attrs="{'readonly':[('state','in',['done'])]}"/>
+                    	</group>
+                    </group>
+                </group>
+
+                <notebook>
+                	<page string="Meses">
+                		<group>
+                			<field name="detalle_ids" nolabel="1" attrs="{'readonly':[('state','in',['done'])]}">
+                				<tree>
+                					<field name="name"/>
+                					<field name="budget_owm_total_cantidad"/>
+                					<field name="budget_owm_total_unidad"/>
+                					<field name="budget_owm_total_pu"/>
+                					<field name="budget_owm_total_moneda"/>
+                					<field name="budget_owm_total_total"/>
+                				</tree>
+                			</field>
+                		</group>
+                	</page>
+                </notebook>
+
+			</form>
+		</field>
+	</record>
+
+
+
+	<record id="presupuesto_it_tree" model="ir.ui.view">
+		<field name="name">presupuesto.it.tree</field>
+		<field name="model">presupuesto.it</field>
+		<field name="arch" type="xml">
+			<tree string="Presupuesto">
+				<field name="name"/>
+				<field name="project_id"/>
+				<field name="unidad_operativa"/>
+				<field name="contratista"/>
+				<field name="contrato"/>
+				<field name="area"/>
+				<field name="num_contrato"/>
+				<field name="num_orden_trabajo"/>
+				<field name="num_orden_cambio"/>
+				<field name="num_solped"/>
+				<field name="state"/>
+			</tree>
+		</field>
+	</record>
+
+
+		<record id="presupuesto_it_action" model="ir.actions.act_window">
+			<field name="name">Presupuesto</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">presupuesto.it</field>
+			<field name="view_mode">tree,form</field>		
+		</record>
+
+	<menuitem
+			id="presupuesto_it_menu"
+			sequence="1"
+			name="Presupuesto"
+			web_icon="presupuesto_it,static/description/icon.png"
+			/>
+
+
+	<menuitem
+			id="second_presupuesto_it_menu"
+			parent="presupuesto_it_menu"
+			name="Presupuesto"
+			sequence="1"/>
+
+	<menuitem
+			id="conf_presupuesto_it_menu"
+			parent="presupuesto_it_menu"
+			name="Configuración"
+			sequence="2"/>
+
+
+	<menuitem
+			id="details_presupuesto_it_menu"
+			action="presupuesto_it_action"
+			parent="second_presupuesto_it_menu"
+			name="Presupuesto"
+			sequence="1"/>
+
+
+
+	<record id="presupuesto_unidad_operativa_tree" model="ir.ui.view">
+		<field name="name">presupuesto.unidad.operativa.tree</field>
+		<field name="model">presupuesto.unidad.operativa</field>
+		<field name="arch" type="xml">
+			<tree string="Unidad Operativa" editable="bottom">
+				<field name="name" required="1"/>
+			</tree>
+		</field>
+	</record>
+
+
+		<record id="presupuesto_unidad_operativa_action" model="ir.actions.act_window">
+			<field name="name">Unidad Operativa</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">presupuesto.unidad.operativa</field>
+			<field name="view_mode">tree</field>		
+		</record>
+
+	<menuitem
+			id="presupuesto_unidad_operativa_menu"
+			action="presupuesto_unidad_operativa_action"
+			parent="conf_presupuesto_it_menu"
+			sequence="3"/>
+
+
+	
+</odoo>

@@ -1,0 +1,26 @@
+<odoo>
+	<data>
+        <record id="view_purchase_order_form_landed_inherit" model="ir.ui.view">
+            <field name="name">purchase.order.form.landed.inherit</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <field name="landed_cost_purchase_ids" invisible="1"/>
+                    <button string="Gastos Vinculados" type="object"
+                        name="action_view_landed_cost"
+                        class="oe_stat_button" icon="fa-plus-square" groups="stock.group_stock_manager"
+                        attrs="{'invisible': [('landed_cost_purchase_ids', '=', [])]}" />
+                </xpath>
+                <field name="state" position="before">
+                    <field name="landed_cost_purchase_visible" invisible="1"/>
+                    <button name="button_create_landed_cost" class="oe_highlight" string="PRORRATEAR GV" type="object" attrs="{'invisible': ['|',('landed_cost_purchase_visible', '!=', True),('state','not in',['purchase','done'])]}"/>
+                </field>
+
+                <xpath expr="//field[@name='order_line']/tree/field[@name='name']" position="after">
+                    <field name="is_landed_cost_line" invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+	</data>
+</odoo>

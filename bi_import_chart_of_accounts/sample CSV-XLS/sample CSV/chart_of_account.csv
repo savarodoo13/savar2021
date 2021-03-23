@@ -1,0 +1,5 @@
+code;name;user;default tax;tag_ids;group;currency;reconsile;depreated;tipo_ef;metodo_cierre;cuenta_cierre;tipo_fe;tiene_destino;a_debe;a_haber;es_analisis;clasificacion_ht
+454688;Glenda;Banco y caja;;;;USD;1;TRUE;Cuentas por Cobrar Comerciales;4;1212001; Venta de Bienes o Serv. (Ingresos Operaciones);TRUE;4111000;4111000;TRUE;0
+454689;Prepayments;Banco y caja;;;;;TRUE;FALSE;;2;1212001;;TRUE;;;;
+454686;Long term;Banco y caja;;;;;0;1;;3;1212001;;TRUE;;;;
+454685;Equipments;Banco y caja;;;;USD;FALSE;0;;1;;;TRUE;;;;

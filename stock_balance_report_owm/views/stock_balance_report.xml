@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+
+	<record model="ir.ui.view" id="stock_balance_report.view_stock_balance_report_tree">
+		<field name="name">stock.balance.report.tree</field>
+		<field name="model">stock.balance.report</field>
+		<field name="arch" type="xml">
+			<tree create="0" edit="0" delete="0">
+				<field name="producto"/>
+				<field name="codigo"/>
+				<field name="part_origin"/>				
+				<field name="unidad"/>
+				<field name="categoria_1"/>
+				<field name="categoria_2"/>
+				<field name="categoria_3"/>
+				<field name="almacen"/>
+				<field name="entrada" sum="entrada"/>
+				<field name="salida" sum="salida"/>
+				<field name="saldo" sum="saldo"/>
+			</tree>
+		</field>
+	</record>
+
+
+	<record id="stock_balance_report.stock_balance_report_filter" model="ir.ui.view">
+		<field name="name">stock.balance.report.filter</field>
+		<field name="model">stock.balance.report</field>
+		<field name="arch" type="xml">
+			<search>
+				<field name="producto"/>
+				<field name="almacen"/>
+				<field name="codigo"/>
+				<field name="unidad"/>				
+				<field name="part_origin"/>
+				<group expand="0" string="Group By">
+					<filter string="Producto" name="producto" domain="[]" context="{'group_by': 'producto'}"/>
+					<filter string="Almacen" name="almacen" domain="[]" context="{'group_by': 'almacen'}"/>
+					<filter string="Codigo" name="codigo" domain="[]" context="{'group_by': 'codigo'}"/>
+				</group>
+			</search>
+		</field>
+	</record>
+
+
+
+</odoo>

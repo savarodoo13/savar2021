@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_presupuesto_unidad_operativa,presupuesto_unidad_operativa,model_presupuesto_unidad_operativa,,1,1,1,1
+access_presupuesto_it,presupuesto_it,model_presupuesto_it,,1,1,1,1
+access_presupuesto_linea_it,presupuesto_linea_it,model_presupuesto_linea_it,,1,1,1,1

@@ -1,0 +1,15 @@
+<odoo>
+	<record id="aditional_project_tables" model="res.groups">
+        <field name="name">Acceso a Tablas Adicionales de Proyectos</field>
+    </record>
+	<record id="base.group_user" model="res.groups">
+		<field name="name">Employee</field>
+		<field name="users" eval="[(4, ref('base.user_root'))]"/>
+		<field name="implied_ids" eval="[(4, ref('aditional_project_tables'))]"></field>
+	</record>
+
+
+	<record id="menus_tablas_extras_project" model="res.groups">
+        <field name="name">Acceso a Tablas De Terreno,Taladro y Dureza de Proyectos</field>
+    </record>
+</odoo>

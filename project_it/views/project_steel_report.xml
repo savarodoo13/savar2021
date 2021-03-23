@@ -1,0 +1,347 @@
+<odoo>
+	<record id="project_steel_report_tree" model="ir.ui.view">
+		<field name="name">project.steel.report.tree</field>
+		<field name="model">project.steel.report</field>
+		<field name="arch" type="xml">
+			<tree string="Journal Items" create="0" edit="0" delete="0">
+				<field name="year"/>
+				<field name="month"/>
+				<field name="date"/>
+				<field name="shift"/>
+				<field name="usuario_odoo"/>
+				<field name="operator"/>
+				<field name="supervisor"/>
+				<field name="ayudante"/>
+				<field name="machine"/>
+				<field name="area"/>
+				<field name="block"/>
+				<field name="bank"/>
+				<field name="project"/>
+				<field name="drill_code"/>
+				<field name="terrain"/>
+				<field name="high"/>
+				<field name="drill_type"/>
+				<field name="hardness"/>
+
+				<field name="hour_from" widget="timesheet_uom"/>
+				<field name="hour_to" widget="timesheet_uom"/>
+				<field name="rop"/>
+				<field name="details" />
+							<field name="broca_id" />
+							<field name="broca_fecha" />
+							<field name="broca_note" />
+							<field name="broca_metros" />
+							<field name="martillo_id" />
+							<field name="martillo_fecha" />
+							<field name="martillo_note" />
+							<field name="martillo_metros" />
+							<field name="pinbox_id" />
+							<field name="pinbox_fecha" />
+							<field name="pinbox_note" />
+							<field name="pinbox_metros" />
+							<field name="chuck_id" />
+							<field name="chuck_fecha" />
+							<field name="chuck_note" />
+							<field name="chuck_metros" />
+							<field name="tubo1_id" />
+							<field name="tubo1_fecha" />
+							<field name="tubo1_note" />
+							<field name="tubo1_metros" />
+							<field name="tubo2_id" />
+							<field name="tubo2_fecha" />
+							<field name="tubo2_note" />
+							<field name="tubo2_metros" />
+							<field name="tubo3_id" />
+							<field name="tubo3_fecha" />
+							<field name="tubo3_note" />
+							<field name="tubo3_metros" />
+							<field name="tubo4_id" />
+							<field name="tubo4_fecha" />
+							<field name="tubo4_note" />
+							<field name="tubo4_metros" />
+							<field name="tubo5_id" />
+							<field name="tubo5_fecha" />
+							<field name="tubo5_note" />
+							<field name="tubo5_metros" />
+							<field name="tubo6_id" />
+							<field name="tubo6_fecha" />
+							<field name="tubo6_note" />
+							<field name="tubo6_metros" />
+
+			</tree>
+		</field>
+	</record>
+	<record id="project_steel_report_pivot" model="ir.ui.view">
+		<field name="name">project.steel.report.pivot</field>
+		<field name="model">project.steel.report</field>
+		<field name="arch" type="xml">
+			<pivot string="Registro Aceros">
+				<field name="drill_code" type="row"/>
+				<field name="broca_id" type="col"/>
+				<field name="rop" type="measure"/>
+			</pivot>
+		</field>
+	</record>
+	<record id="project_steel_report_graph" model="ir.ui.view">
+		<field name="name">project.steel.report.graph</field>
+		<field name="model">project.steel.report</field>
+		<field name="arch" type="xml">
+			<graph string="Aceros" type="line">
+				<field name="drill_code" type="col"/>
+				<field name="rop" type="measure"/>
+			</graph>
+		</field>
+	</record>
+	<record id="action_project_steel_report" model="ir.actions.server">
+		<field name="name">Analisis de Aceros</field>
+		<field name="model_id" ref="project.model_project_task"/>
+		<field name="binding_model_id" ref="project.model_project_task"/>
+		<field name="state">code</field>
+		<field name="code">action = model.get_steel_view()</field>
+	</record>
+	<menuitem
+			id="project_steel_report_menu"
+			action="action_project_steel_report"
+			parent="project.menu_project_report"
+			groups="project.group_project_manager"
+			sequence="3"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<record id="project_binnacle_report_tree" model="ir.ui.view">
+		<field name="name">project.binnacle.report.tree</field>
+		<field name="model">project.binnacle.report</field>
+		<field name="arch" type="xml">
+			<tree string="Journal Items" create="0" edit="0" delete="0">
+				<field name="year"/>
+				<field name="month"/>
+				<field name="date"/>
+				<field name="type_contract"/>
+				<field name="area"/>
+				<field name="user_odoo"/>
+				<field name="shift"/>
+				<field name="operador"/>
+				<field name="supervisor"/>
+				<field name="helper"/>
+				<field name="machine"/>
+				<field name="operation_name"/>
+				<field name="operation_description"/>
+				<field name="hour_from"/>
+				<field name="hour_to"/>
+				<field name="unit_amount"/>
+				<field name="observation"/>
+			</tree>
+		</field>
+	</record>
+	<record id="project_binnacle_report_pivot" model="ir.ui.view">
+		<field name="name">project.binnacle.report.pivot</field>
+		<field name="model">project.binnacle.report</field>
+		<field name="arch" type="xml">
+			<pivot string="Registro Bitacora">
+				<field name="machine" type="row"/>
+				<field name="area" type="col"/>
+				<field name="unit_amount" type="measure"/>
+			</pivot>
+		</field>
+	</record>
+	<record id="project_binnacle_report_graph" model="ir.ui.view">
+		<field name="name">project.binnacle.report.graph</field>
+		<field name="model">project.binnacle.report</field>
+		<field name="arch" type="xml">
+			<graph string="Registro Bitacora" type="line">
+				<field name="machine" type="col"/>
+				<field name="unit_amount" type="measure"/>
+			</graph>
+		</field>
+	</record>
+	<record id="action_project_binnacle_report" model="ir.actions.server">
+		<field name="name">Analisis de Bitacora</field>
+		<field name="model_id" ref="project.model_project_task"/>
+		<field name="binding_model_id" ref="project.model_project_task"/>
+		<field name="state">code</field>
+		<field name="code">action = model.get_binnacle_view()</field>
+	</record>
+	<menuitem
+			id="project_binnacle_report_menu"
+			action="action_project_binnacle_report"
+			parent="project.menu_project_report"
+			groups="project.group_project_manager"
+			sequence="3"/>
+
+
+
+
+
+
+	<record id="project_hourmeter_report_tree" model="ir.ui.view">
+		<field name="name">project.hourmeter.report.tree</field>
+		<field name="model">project.hourmeter.report</field>
+		<field name="arch" type="xml">
+			<tree string="Analisis de Horometro" create="0" edit="0" delete="0">
+				<field name="year"/>
+				<field name="month"/>
+				<field name="date"/>
+				<field name="type_contract"/>
+				<field name="area"/>
+				<field name="user_odoo"/>
+				<field name="shift"/>
+				<field name="operador"/>
+				<field name="supervisor"/>
+				<field name="helper"/>
+				<field name="machine"/>
+
+				<field name="fuel_hour_from"/>
+				<field name="fuel_hour_to"/>
+				<field name="fuel_diesel_hour_from"/>
+				<field name="fuel_diesel_hour_to"/>
+				<field name="refuel_time"/>
+				<field name="fuel_qty"/>
+			</tree>
+		</field>
+	</record>
+	<record id="project_hourmeter_report_pivot" model="ir.ui.view">
+		<field name="name">project.hourmeter.report.pivot</field>
+		<field name="model">project.hourmeter.report</field>
+		<field name="arch" type="xml">
+			<pivot string="Registro Horometro">
+				<field name="machine" type="row"/>
+				<field name="area" type="col"/>
+				<field name="refuel_time" type="measure"/>
+			</pivot>
+		</field>
+	</record>
+	<record id="project_hourmeter_report_graph" model="ir.ui.view">
+		<field name="name">project.hourmeter.report.graph</field>
+		<field name="model">project.hourmeter.report</field>
+		<field name="arch" type="xml">
+			<graph string="Registro Horometro" type="line">
+				<field name="machine" type="col"/>
+				<field name="refuel_time" type="measure"/>
+			</graph>
+		</field>
+	</record>
+	<record id="action_project_hourmeter_report" model="ir.actions.server">
+		<field name="name">Analisis de Horometro</field>
+		<field name="model_id" ref="project.model_project_task"/>
+		<field name="binding_model_id" ref="project.model_project_task"/>
+		<field name="state">code</field>
+		<field name="code">action = model.get_hourmeter_view()</field>
+	</record>
+	<menuitem
+			id="project_hourmeter_report_menu"
+			action="action_project_hourmeter_report"
+			parent="project.menu_project_report"
+			groups="project.group_project_manager"
+			sequence="3"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<record id="xmaintenance_request_report_detalle_tree" model="ir.ui.view">
+		<field name="name">maintenance.component.report.tree</field>
+		<field name="model">maintenance.component.report</field>
+		<field name="arch" type="xml">
+			<tree string="Mantenimiento" create="0" edit="0" delete="0">
+				<field name="name"/>
+				<field name="employee_id"/>
+				<field name="equipment_id"/>
+				<field name="category_id"/>
+				<field name="linea_report"/>
+				<field name="request_date"/>
+				<field name="type_preventivo"/>
+				<field name="type_correctivo"/>
+				<field name="maintenance_type"/>
+				<field name="maintenance_team_id"/>
+				<field name="user_id"/>
+				<field name="schedule_date"/>
+				<field name="expected_duration"/>
+				<field name="duration"/>
+				<field name="priority"/>
+				<field name="email_cc"/>
+				<field name="company_id"/>
+				<field name="horometro_planing"/>
+				<field name="horometro_real"/>
+				<field name="horometro_real_percution"/>
+
+				<field name="component_id"/>
+				<field name="product_id"/>
+				<field name="lot_id"/>
+				<field name="quantity"/>
+				<field name="notes"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="xmaintenance_request_pivotcomponent" model="ir.ui.view">
+		<field name="name">maintenance.component.report.pivot</field>
+		<field name="model">maintenance.component.report</field>
+		<field name="arch" type="xml">
+			<pivot string="Mantenimiento">
+				<field name="name" type="row"/>
+				<field name="employee_id" type="col"/>
+				<field name="horometro_planing" type="measure"/>
+			</pivot>
+		</field>
+	</record>
+	<record id="xmaintenance_request_graphcomponent" model="ir.ui.view">
+		<field name="name">maintenance.component.report.graph</field>
+		<field name="model">maintenance.component.report</field>
+		<field name="arch" type="xml">
+			<graph string="Mantenimiento" type="line">
+				<field name="name" type="col"/>
+				<field name="horometro_planing" type="measure"/>
+			</graph>
+		</field>
+	</record>
+
+
+	<record id="xmaintenance_request_actioncomponent" model="ir.actions.server">
+		<field name="name">Reporte Mantenimiento</field>
+		<field name="model_id" ref="project.model_project_task"/>
+		<field name="binding_model_id" ref="project.model_project_task"/>
+		<field name="state">code</field>
+		<field name="code">action = model.get_mantenimiento_view()</field>
+	</record>
+
+	<menuitem
+			id="maintenance_requestx_menucomponente"
+			action="xmaintenance_request_actioncomponent"
+			parent="maintenance.menu_m_reports"
+			sequence="3"/>
+
+</odoo>

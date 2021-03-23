@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="purchase_herencia" model="ir.ui.view">
+           <field name="name">purchase.order</field>
+           <field name="model">purchase.order</field>
+           <field name="inherit_id" ref="purchase.purchase_order_form"/>
+           <field name="arch" type="xml">
+               <xpath expr="//field[@name='company_id']" position="after">
+                   <field name="edit_lines"  invisible="1" />
+	           </xpath>
+
+               <xpath expr="/form/sheet/notebook/page[1]/field[@name='order_line']" position="attributes">
+                   <!-- <attribute name="readonly">[('edit_lines', '=', True)]</attribute> -->
+                   <attribute name="attrs">{'readonly':[('edit_lines','!=',True)]}</attribute>
+               </xpath>
+               <xpath expr="/form/sheet/notebook/page[1]/field[@name='order_line']/tree/field[@name='product_id']" position="after">
+                   <field name="prioridad_it"  optional="show" />
+                   <field name="observacion_it"  optional="show" />
+               </xpath>
+
+           </field>
+    </record>
+
+    <record id="albaran_herencia" model="ir.ui.view">
+           <field name="name">stock.picking</field>
+           <field name="model">stock.picking</field>
+           <field name="inherit_id" ref="stock.view_picking_form"/>
+           <field name="arch" type="xml">
+               <xpath expr="/form/sheet/notebook/page[3]/field[@name='move_ids_without_package']/tree/field[@name='product_id']" position="after">
+                   <field name="prioridad_it"  optional="show" />
+                   <field name="observacion_it"  optional="show" />
+                   <field name="trabajador_it"  optional="show" />
+                   <field name="purchase_line_id"  invisible="1" />
+               </xpath>
+           </field>
+    </record>
+
+
+</odoo>

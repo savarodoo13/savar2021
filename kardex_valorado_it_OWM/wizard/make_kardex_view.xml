@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+         <record model="ir.ui.view" id="view_product_marca_tree">
+            <field name="name">product.marca.tree</field>
+            <field name="model">product.marca</field>
+            <field name="arch" type="xml">
+                <tree editable="bottom">
+                    <field name="name" required="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_product_marca" model="ir.actions.act_window">
+            <field name="name">Marca Producto</field>
+            <field name="res_model">product.marca</field>
+            <field name="view_id" ref="view_product_marca_tree"/>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree</field>
+        </record>
+
+        <menuitem action="action_product_marca" 
+                  id="menu_action_product_marca_sale" 
+                  parent="sale.prod_config_main" 
+                  sequence="4" />
+
+
+        <menuitem action="action_product_marca" 
+                  id="menu_action_product_marca_purchase" 
+                  parent="purchase.menu_product_in_config_purchase" 
+                  sequence="4" />
+
+                    
+
+        <record id="view_product_template_form_inherit_marca" model="ir.ui.view">
+            <field name="name">product.template.inherit.onu</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <field name="uom_po_id" position="after">
+                    <field name="marca_id"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_make_kardex_valorado" model="ir.ui.view">
+            <field name="name">make.kardex.valorado.form</field>
+            <field name="model">make.kardex.valorado</field>
+            <field name="inherit_id" ref="kardex_valorado_it.view_make_kardex_valorado"/>
+            <field name="arch" type="xml">
+            	<field name="check_fecha" position="after">    
+                        <field name="check_account"/>        		
+            	</field>
+             </field>
+        </record>
+
+
+    </data>
+</odoo>
